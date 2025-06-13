@@ -1,31 +1,22 @@
-import { useEffect, useState } from 'react';
-import BlogCard from './BlogCard'; // import your BlogCard
-import './BlogList.css'; // optional for grid layout
+import { Link } from 'react-router-dom';
+import { useBlog } from '../../context/BlogContext';
+import BlogCard from './BlogCard';
+import './BlogList.css';
 
 const BlogList = () => {
-  const [blogs, setBlogs] = useState([]);
+  const { blogs, loading, error } = useBlog();
 
-  useEffect(() => {
-    // Fetch all blogs from your backend
-    fetch('http://localhost:3000/api/posts')
-      .then((res) => res.json())
-      .then((data) => setBlogs(data))
-      .catch((err) => console.error('Failed to fetch blogs:', err));
-  }, []);
+  if (loading) return <p>Loading blogs...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="blog-list">
-      {blogs.length === 0 ? (
-        <p>No blogs available.</p>
-      ) : (
-        blogs.map((blog) => (
-          <BlogCard
-            key={blog._id || blog.id}
-            title={blog.title}
-            content={blog.content}
-          />
-        ))
-      )}
+      {blogs.map((blog) =>{
+        return (
+        <Link to={`/blogs/${blog._id}`} key={blog._id}>
+          <BlogCard title={blog.title} content={blog.content} />
+        </Link>
+      )})}
     </div>
   );
 };

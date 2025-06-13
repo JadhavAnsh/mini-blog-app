@@ -1,9 +1,12 @@
+import { useBlog } from '@/context/BlogContext';
 import { useState } from 'react';
 import './BlogForm.css';
 
 const BlogForm = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const { createBlog } = useBlog();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,29 +17,15 @@ const BlogForm = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/posts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ title, content }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to create blog post');
-      }
-
-      alert('Blog posted successfully!');
+      await createBlog({ title, content });
+      alert('Blog created successfully!');
       setTitle('');
       setContent('');
     } catch (err) {
-      console.error(err.message);
-      alert('Error posting blog.');
+      alert(err.message);
     }
   };
-
+  
   return (
     <form className="blog-form" onSubmit={handleSubmit}>
       <h2 className="form-heading">Create a New Blog</h2>
