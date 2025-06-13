@@ -9,7 +9,7 @@ const BlogDetails = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/posts/${id}`)
+    fetch(`https://mini-blog-app-backend.onrender.com/api/posts/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Blog not found");
         console.log("id", id);

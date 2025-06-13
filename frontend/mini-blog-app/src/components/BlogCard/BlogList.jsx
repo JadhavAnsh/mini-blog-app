@@ -11,12 +11,13 @@ const BlogList = () => {
 
   return (
     <div className="blog-list">
-      {blogs.map((blog) =>{
+      {blogs.map((blog) => {
         return (
-        <Link to={`/blogs/${blog._id}`} key={blog._id}>
-          <BlogCard title={blog.title} content={blog.content} />
-        </Link>
-      )})}
+          <Link to={`/blogs/${blog._id}`} key={blog._id}>
+            <BlogCard title={blog.title} content={blog.content} />
+          </Link>
+        );
+      })}
     </div>
   );
 };
