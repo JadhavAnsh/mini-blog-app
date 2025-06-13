@@ -1,0 +1,30 @@
+.navbar {
+  background-color: #ebf8ff; /* Light blue */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1a202c; /* Dark gray */
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #4a5568; /* Gray */
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #3182ce; /* Blue on hover */
+}

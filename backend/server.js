@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const BlogRouter = require('./routes/postRoutes.js');
+const cros = require('cors');
 
 dotenv.config();
 const app = express();
@@ -17,6 +18,7 @@ function startServer() {
         console.log("MongoDB connected!, DataBase name: " + mongoose.connection.db.databaseName)
       }).then(() => {
         // Middlewares
+        app.use(cros());
         app.use(express.json());
         app.use(express.urlencoded({ extended: false }));
       })
